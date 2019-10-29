@@ -1,7 +1,6 @@
 package projetobancoo;
 
 import GUI.Login;
-import javax.swing.JInternalFrame;
 
 public class ProjetoBancoo {
 
