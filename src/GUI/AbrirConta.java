@@ -249,10 +249,10 @@ public class AbrirConta extends javax.swing.JFrame {
     }
     private void CriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarContaActionPerformed
             System.out.println(btnome.getText());
-            System.out.println((String)btcpf.getValue());
-            System.out.println((String)btrg.getValue());
             System.out.println((Date)btdatanascimento.getValue());
             System.out.println(btnacionalidade.getText());
+            System.out.println((String)btcpf.getValue());
+            System.out.println((String)btrg.getValue());
             System.out.println(btestado.getText());
             System.out.println(btcidade.getText());
             System.out.println((String)bttipoconta.getSelectedItem());
