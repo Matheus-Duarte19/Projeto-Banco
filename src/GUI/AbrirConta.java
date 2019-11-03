@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GUI;
 
 import DAO.ClienteDAO;
@@ -66,7 +62,7 @@ public class AbrirConta extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        btdatanascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        btdatanascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         try {
             btrg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
@@ -241,45 +237,31 @@ public class AbrirConta extends javax.swing.JFrame {
             return false;
         } else {
         }
-        if(((Date)btdatanascimento.getValue()).after(new Date())){
-            JOptionPane.showMessageDialog(this, "Data inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-    }
+       
         return true;
     }
     private void CriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarContaActionPerformed
-            System.out.println(btnome.getText());
-            System.out.println((Date)btdatanascimento.getValue());
-            System.out.println(btnacionalidade.getText());
-            System.out.println((String)btcpf.getValue());
-            System.out.println((String)btrg.getValue());
-            System.out.println(btestado.getText());
-            System.out.println(btcidade.getText());
-            System.out.println((String)bttipoconta.getSelectedItem());
-            System.out.println((String)btsenha.getValue());
-          
-         if(validarFormulario()){
-              
+            
+     
             cliente.setNome(btnome.getText());
-            cliente.setCpf((String) btcpf.getValue());
+          /*  cliente.setCpf((String) btcpf.getValue());
             cliente.setRg((String) btrg.getValue());
             cliente.setDatanascimento((Date) btdatanascimento.getValue());
             cliente.setNacionalidade(btnacionalidade.getText());
             cliente.setEstado(btestado.getText());
             cliente.setCidade(btcidade.getText());
             cliente.setTipoconta((String) bttipoconta.getSelectedItem());
-            cliente.setSenha((String) btsenha.getValue());
+            cliente.setSenha((String) btsenha.getValue()); 
             
-            if(cliente.getCodigo() == 0){
+           if(cliente.getCodigo() == 0){
                 try{
                     clientedao.inserir(cliente);
                 }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-      }
-     }
-         
-         
+                
+            
+      }*/ 
     }//GEN-LAST:event_CriarContaActionPerformed
 
     /**
