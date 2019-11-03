@@ -17,21 +17,9 @@ public class Cliente {
     private String estado;
     private String nacionalidade;
     private String senha;
-    
+
     public Cliente(){
         this.codigo = 0;
-        this.nome = "";
-        this.cpf = "";
-        this.rg ="";
-        this.tipoconta = "";
-        this.datanascimento = new Date();
-        this.cidade = "";
-        this.estado = "";
-        this.nacionalidade = "";
-        this.senha = "";
-    }
-    public Cliente(int codigo){
-        this.codigo = codigo;
         this.nome = "";
         this.cpf = "";
         this.rg ="";
@@ -124,24 +112,4 @@ public class Cliente {
     }
 
     
-  
-    
-    
-     @Override
-    public String toString(){
-        return getNome();
-    }
-    
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof Cliente){
-            Cliente c = (Cliente) o;
-            if(c.getCodigo() == this.getCodigo()){
-                return true;
-            }
-        }
-        return false;
-    }
-
-  
 }
