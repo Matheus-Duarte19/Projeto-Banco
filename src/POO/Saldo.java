@@ -1,6 +1,6 @@
 
 package POO;
-
+import java.util.Objects;
 /**
  *
  * @author extra
@@ -48,6 +48,18 @@ public class Saldo {
         this.contacliente = contacliente;
     }
  
+   
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Saldo){
+            Saldo s = (Saldo) o;
+            if(s.getCodigo() == this.getCodigo()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
       
 }
 

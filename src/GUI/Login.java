@@ -6,6 +6,7 @@
 package GUI;
 
 
+import DAO.ClienteDAO;
 import POO.Cliente;
 import javax.swing.JOptionPane;
 
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 private Cliente cliente;
+private ClienteDAO clientedao = new ClienteDAO();
     /**
      * Creates new form Login
      */
@@ -153,10 +155,11 @@ private Cliente cliente;
     
     
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        if(validarUsuario()){
+        
         Menu m = new Menu();
         m.setVisible(true);
-        dispose();}
+        dispose();
+        
     }//GEN-LAST:event_entrarActionPerformed
 
     private void AbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirContaActionPerformed

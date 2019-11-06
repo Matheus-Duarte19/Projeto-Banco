@@ -47,7 +47,7 @@ public class AbrirConta extends javax.swing.JFrame {
         btcidade = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        bttipoconta = new javax.swing.JComboBox<>();
+        tipoconta = new javax.swing.JComboBox<>();
         btsenha = new javax.swing.JFormattedTextField();
         CriarConta = new keeptoo.KButton();
         btnome = new javax.swing.JTextField();
@@ -97,7 +97,7 @@ public class AbrirConta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Tipo da Conta:");
 
-        bttipoconta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Corrente", "Poupança" }));
+        tipoconta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Corrente", "Poupança" }));
 
         try {
             btsenha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -140,7 +140,7 @@ public class AbrirConta extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(37, 37, 37))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(bttipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))
@@ -201,11 +201,9 @@ public class AbrirConta extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(bttipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,19 +221,25 @@ public class AbrirConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarContaActionPerformed
-        
-        if(validarFormulario()){
+     if(validarFormulario()){
         cliente.setNome(btnome.getText());
         cliente.setDatanascimento((Date)btdatanascimento.getValue());
         cliente.setNacionalidade(btnacionalidade.getText());
         cliente.setCpf((String)btcpf.getValue());
         cliente.setRg((String)btrg.getValue());
+        cliente.setEstado(btestado.getText());
+        cliente.setCidade(btcidade.getText());
+        cliente.setSenha((String) btsenha.getValue());
+        cliente.setTipoconta((String) tipoconta.getSelectedItem());
         try{
                     clientedao.inserir(cliente);
                 }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         }
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
     }//GEN-LAST:event_CriarContaActionPerformed
 
      private Boolean validarFormulario(){
@@ -243,10 +247,13 @@ public class AbrirConta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         }
+        if(((Date)btdatanascimento.getValue()).after(new Date())){
+            JOptionPane.showMessageDialog(this, "Data inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+    }
         if(btcpf.getText().trim().length() != 14){
             JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
-        } else {
         }
         if(btrg.getText().trim().length() != 12){
             JOptionPane.showMessageDialog(this, "RG inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
@@ -270,7 +277,6 @@ public class AbrirConta extends javax.swing.JFrame {
     private javax.swing.JTextField btnome;
     private javax.swing.JFormattedTextField btrg;
     private javax.swing.JFormattedTextField btsenha;
-    private javax.swing.JComboBox<String> bttipoconta;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -282,5 +288,6 @@ public class AbrirConta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JComboBox<String> tipoconta;
     // End of variables declaration//GEN-END:variables
 }

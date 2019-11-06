@@ -60,11 +60,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel10" max="32767" attributes="0"/>
-                              <Component id="Conta" max="32767" attributes="0"/>
+                              <Component id="numeroConta" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btconta" min="-2" max="-2" attributes="0"/>
+                              <Component id="tipoconta" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -110,8 +110,8 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btconta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Conta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tipoconta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="numeroConta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -175,7 +175,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DepositarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="btconta">
+        <Component class="javax.swing.JComboBox" name="tipoconta">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -201,7 +201,7 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="novosaldo">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="Conta">
+        <Component class="javax.swing.JFormattedTextField" name="numeroConta">
         </Component>
       </SubComponents>
     </Container>
