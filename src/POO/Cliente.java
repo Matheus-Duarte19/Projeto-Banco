@@ -1,6 +1,7 @@
 
 package POO;
 import java.util.Date;
+import java.util.Objects;
 /**
  *
  * @author extra
@@ -171,5 +172,57 @@ public class Cliente {
         this.senha = senha;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.rg, other.rg)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoconta, other.tipoconta)) {
+            return false;
+        }
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.nacionalidade, other.nacionalidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.datanascimento, other.datanascimento)) {
+            return false;
+        }
+        return true;
+    }
+
+    
    
 }

@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import DAO.ClienteDAO;
+import DAO.SaldoDAO;
+import POO.Saldo;
 import POO.Cliente;
 import javax.swing.JOptionPane;
 
@@ -15,27 +16,25 @@ import javax.swing.JOptionPane;
  */
 public class Deposito extends javax.swing.JInternalFrame {
 
-     private Cliente cliente = null;
-    private ClienteDAO clientedao = new ClienteDAO();
+    private Cliente cliente;
+    private Saldo saldo = new Saldo();
+    private SaldoDAO saldodao = new SaldoDAO();
     /**
      * Creates new form Depósito
      */
     public Deposito() {
         initComponents();
+        btsaldo.setText(Float.toString(saldo.getSaldo()));
     }
-    
+   
+
  private Boolean validarFormulario(){
-        if(btnome.getText().trim().length() < 2){
+        if(btnome.getText().equals(cliente.getNome())){
             JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        if(btnumero.getText().trim().length() != 14){
-            JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        } else {
-        }
-        if(btconta.getSelectedItem().toString().length() != cliente.getTipoconta().trim().length()){
-            JOptionPane.showMessageDialog(this, "RG inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+        if(Conta.getValue().equals(saldo.getContacliente())){
+            JOptionPane.showMessageDialog(this, "Conta inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         } else {
         }
@@ -58,12 +57,12 @@ public class Deposito extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnome = new javax.swing.JTextField();
-        btnumero = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        kButton1 = new keeptoo.KButton();
-        jTextField1 = new javax.swing.JTextField();
+        Depositar = new keeptoo.KButton();
         btconta = new javax.swing.JComboBox<>();
+        btsaldo = new javax.swing.JFormattedTextField();
+        novosaldo = new javax.swing.JFormattedTextField();
+        Conta = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -82,20 +81,26 @@ public class Deposito extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel12.setText("Saldo Disponivel:");
 
-        kButton1.setText("Transferir");
+        Depositar.setText("Transferir");
+        Depositar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DepositarActionPerformed(evt);
+            }
+        });
 
         btconta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Corrente", "Poupança", " " }));
+
+        btsaldo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        btsaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btsaldoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addGap(255, 255, 255))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,25 +108,34 @@ public class Deposito extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(btnome, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(btnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btnome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Conta))
+                        .addGap(27, 27, 27)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
                         .addGap(21, 21, 21))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(btsaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(255, 255, 255))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(kButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(Depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(novosaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -130,8 +144,8 @@ public class Deposito extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(btsaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
@@ -139,14 +153,14 @@ public class Deposito extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Conta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(kButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(novosaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(Depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
 
@@ -166,19 +180,35 @@ public class Deposito extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btsaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaldoActionPerformed
+      
+    }//GEN-LAST:event_btsaldoActionPerformed
+
+    private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
+        if(validarFormulario()){
+        saldo.setSaldo((float)novosaldo.getValue());
+        saldo.setContacliente((int) Conta.getValue());
+        try{
+                    saldodao.inserir(saldo);
+                }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_DepositarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField Conta;
+    private keeptoo.KButton Depositar;
     private javax.swing.JComboBox<String> btconta;
     private javax.swing.JTextField btnome;
-    private javax.swing.JTextField btnumero;
+    private javax.swing.JFormattedTextField btsaldo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField8;
-    private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JFormattedTextField novosaldo;
     // End of variables declaration//GEN-END:variables
 }

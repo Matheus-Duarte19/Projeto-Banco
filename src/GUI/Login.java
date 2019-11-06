@@ -6,12 +6,16 @@
 package GUI;
 
 
+import POO.Cliente;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author francisco.pereira
  */
 public class Login extends javax.swing.JFrame {
-
+private Cliente cliente;
     /**
      * Creates new form Login
      */
@@ -30,13 +34,13 @@ public class Login extends javax.swing.JFrame {
 
         kButton1 = new keeptoo.KButton();
         kGradientPanel1 = new keeptoo.KGradientPanel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        nome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         entrar = new keeptoo.KButton();
         AbrirConta = new keeptoo.KButton();
+        senha = new javax.swing.JFormattedTextField();
 
         kButton1.setText("kButton1");
 
@@ -74,31 +78,33 @@ public class Login extends javax.swing.JFrame {
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AbrirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                            .addGap(150, 150, 150)
+                            .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                            .addGap(92, 92, 92)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(AbrirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
                     .addGap(63, 63, 63)
                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addContainerGap(71, Short.MAX_VALUE)))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
+                .addContainerGap(114, Short.MAX_VALUE)
+                .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -110,12 +116,10 @@ public class Login extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(jLabel4)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(27, 27, 27)
                     .addComponent(jLabel5)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(112, Short.MAX_VALUE)))
+                    .addContainerGap(138, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,11 +137,26 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ private Boolean validarUsuario(){
+        if(nome.getText().equals(cliente.getNome())){
+            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(senha.getValue().equals(cliente.getSenha())){
+            JOptionPane.showMessageDialog(this, "Senha inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else {
+        }
 
+        return true;
+    }
+    
+    
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+        if(validarUsuario()){
         Menu m = new Menu();
         m.setVisible(true);
-        dispose();
+        dispose();}
     }//GEN-LAST:event_entrarActionPerformed
 
     private void AbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirContaActionPerformed
@@ -187,10 +206,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JTextField nome;
+    private javax.swing.JFormattedTextField senha;
     // End of variables declaration//GEN-END:variables
 
     private void close() {
