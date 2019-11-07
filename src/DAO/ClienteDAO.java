@@ -107,6 +107,22 @@ public class ClienteDAO implements IDAO<Cliente>{
         }
         return cliente;
     }
+    
+    public Cliente login(String Cpf) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, Cpf);
+        ResultSet rs = ps.executeQuery();
+       
+        Cliente cliente = new Cliente();
+        if(rs.next()){
+
+            cliente.setCpf(rs.getString("CPF"));
+            cliente.setSenha(rs.getString("SENHA"));
+        }
+        return cliente;
+    }
 
    
     

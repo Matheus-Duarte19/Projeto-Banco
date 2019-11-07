@@ -30,7 +30,7 @@ public class Deposito extends javax.swing.JInternalFrame {
     }
    
 
- private Boolean validarFormulario(){
+ private Boolean validar(){
         if(btnome.getText().equals(cliente.getNome())){
             JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
@@ -192,7 +192,7 @@ public class Deposito extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btsaldoActionPerformed
 
     private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
-        if(validarFormulario()){
+        if(validar()){
         saldo.setSaldo((float)novosaldo.getValue());
         saldo.setContacliente((int) numeroConta.getValue());
         try{

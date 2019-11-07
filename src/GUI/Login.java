@@ -35,16 +35,19 @@ private ClienteDAO clientedao = new ClienteDAO();
     private void initComponents() {
 
         kButton1 = new keeptoo.KButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
         kGradientPanel1 = new keeptoo.KGradientPanel();
-        nome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         entrar = new keeptoo.KButton();
         AbrirConta = new keeptoo.KButton();
-        senha = new javax.swing.JFormattedTextField();
+        senha = new javax.swing.JPasswordField();
+        cpf = new javax.swing.JFormattedTextField();
 
         kButton1.setText("kButton1");
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -75,38 +78,53 @@ private ClienteDAO clientedao = new ClienteDAO();
             }
         });
 
+        senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senhaActionPerformed(evt);
+            }
+        });
+
+        try {
+            cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                            .addGap(92, 92, 92)
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(AbrirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AbrirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
                     .addGap(63, 63, 63)
                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4)
-                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addContainerGap(71, Short.MAX_VALUE)))
+                    .addContainerGap(248, Short.MAX_VALUE)))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -117,9 +135,7 @@ private ClienteDAO clientedao = new ClienteDAO();
                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel4)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(27, 27, 27)
+                    .addGap(53, 53, 53)
                     .addComponent(jLabel5)
                     .addContainerGap(138, Short.MAX_VALUE)))
         );
@@ -140,11 +156,11 @@ private ClienteDAO clientedao = new ClienteDAO();
         pack();
     }// </editor-fold>//GEN-END:initComponents
  private Boolean validarUsuario(){
-        if(nome.getText().equals(cliente.getNome())){
+        if(cpf.getText().equals(cliente.getNome())){
             JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        if(senha.getValue().equals(cliente.getSenha())){
+        if((String)senha.getPassword().equals(cliente.getSenha())){
             JOptionPane.showMessageDialog(this, "Senha inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         } else {
@@ -155,11 +171,22 @@ private ClienteDAO clientedao = new ClienteDAO();
     
     
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+        String senha = new String(senha.getPassword());
         
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
-        
+        if(validarUsuario()){
+            if(cpf.getText() != "" || senha  != ""){
+                try{
+                    clientedao.login(cpf.getText());
+                    JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
+                     Menu m = new Menu();
+                   m.setVisible(true);
+                   dispose();
+                } catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                        + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } 
     }//GEN-LAST:event_entrarActionPerformed
 
     private void AbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirContaActionPerformed
@@ -167,6 +194,10 @@ private ClienteDAO clientedao = new ClienteDAO();
        ac.setVisible(true);
        dispose();
     }//GEN-LAST:event_AbrirContaActionPerformed
+
+    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_senhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,14 +236,15 @@ private ClienteDAO clientedao = new ClienteDAO();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private keeptoo.KButton AbrirConta;
+    private javax.swing.JFormattedTextField cpf;
     private keeptoo.KButton entrar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField jPasswordField1;
     private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private javax.swing.JTextField nome;
-    private javax.swing.JFormattedTextField senha;
+    private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 
     private void close() {
