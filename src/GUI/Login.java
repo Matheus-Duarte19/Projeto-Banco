@@ -8,6 +8,8 @@ package GUI;
 
 import DAO.ClienteDAO;
 import POO.Cliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -16,8 +18,7 @@ import javax.swing.JOptionPane;
  * @author francisco.pereira
  */
 public class Login extends javax.swing.JFrame {
-private Cliente cliente;
-private ClienteDAO clientedao = new ClienteDAO();
+
     /**
      * Creates new form Login
      */
@@ -36,6 +37,7 @@ private ClienteDAO clientedao = new ClienteDAO();
 
         kButton1 = new keeptoo.KButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -48,6 +50,8 @@ private ClienteDAO clientedao = new ClienteDAO();
         kButton1.setText("kButton1");
 
         jPasswordField1.setText("jPasswordField1");
+
+        jPasswordField2.setText("jPasswordField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -103,11 +107,10 @@ private ClienteDAO clientedao = new ClienteDAO();
                         .addComponent(AbrirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
@@ -155,38 +158,18 @@ private ClienteDAO clientedao = new ClienteDAO();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- private Boolean validarUsuario(){
-        if(cpf.getText().equals(cliente.getNome())){
-            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        if((String)senha.getPassword().equals(cliente.getSenha())){
-            JOptionPane.showMessageDialog(this, "Senha inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        } else {
-        }
 
-        return true;
-    }
-    
-    
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        String senha = new String(senha.getPassword());
+       
+        ClienteDAO dao = new ClienteDAO();
         
-        if(validarUsuario()){
-            if(cpf.getText() != "" || senha  != ""){
-                try{
-                    clientedao.login(cpf.getText());
-                    JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
-                     Menu m = new Menu();
-                   m.setVisible(true);
-                   dispose();
-                } catch(Exception e){
-                    JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
-                        + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } 
+            if(dao.Check(cpf.getText(), senha.getText())){
+                new Menu().setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null,"Senha Incorreta!");
+            
+            } 
     }//GEN-LAST:event_entrarActionPerformed
 
     private void AbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirContaActionPerformed
@@ -242,6 +225,7 @@ private ClienteDAO clientedao = new ClienteDAO();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private keeptoo.KButton kButton1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JPasswordField senha;

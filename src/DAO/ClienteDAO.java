@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import POO.Cliente;
+import com.sun.istack.internal.logging.Logger;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import sun.util.logging.PlatformLogger;
 
 public class ClienteDAO implements IDAO<Cliente>{
      
@@ -107,29 +111,20 @@ public class ClienteDAO implements IDAO<Cliente>{
         }
         return cliente;
     }
-    
-    public Cliente login(String Cpf) throws Exception{
-        Conexao c = new Conexao();
-        String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
-        PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setString(1, Cpf);
-        ResultSet rs = ps.executeQuery();
-       
-        Cliente cliente = new Cliente();
-        if(rs.next()){
-
-            cliente.setCpf(rs.getString("CPF"));
-            cliente.setSenha(rs.getString("SENHA"));
-        }
-        return cliente;
-    }
-
    
-    
-    
-    
-    
-    
-    
-    
+     public boolean Check (String cpf, String senha) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?, SENHA=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, cpf);
+        ps.setString(2, senha);
+        ResultSet rs = ps.executeQuery();
+       boolean check = false;
+       
+  
+        if(rs.next()){
+           check = true;
+        }
+        return check;
+    }
 }
