@@ -7,9 +7,6 @@ package GUI;
 
 
 import DAO.ClienteDAO;
-import POO.Cliente;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -163,7 +160,7 @@ public class Login extends javax.swing.JFrame {
        
         ClienteDAO dao = new ClienteDAO();
         
-            if(dao.Check(cpf.getText(), senha.getText())){
+            if(dao.CheckLogin(cpf.getText(), senha.getText())){
                 new Menu().setVisible(true);
                 this.dispose();
             }else{
