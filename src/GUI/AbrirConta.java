@@ -1,6 +1,5 @@
 
 package GUI;
-
 import DAO.ClienteDAO;
 import POO.Cliente;
 import java.util.Date;

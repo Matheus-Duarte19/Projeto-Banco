@@ -31,6 +31,7 @@ public class Deposito extends javax.swing.JInternalFrame {
    
 
  private Boolean validar(){
+     
         if(btnome.getText().equals(cliente.getNome())){
             JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;

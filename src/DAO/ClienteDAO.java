@@ -5,11 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import POO.Cliente;
-import com.sun.istack.internal.logging.Logger;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import javax.swing.JOptionPane;
-import sun.util.logging.PlatformLogger;
+
 
 public class ClienteDAO implements IDAO<Cliente>{
      
@@ -112,25 +108,29 @@ public class ClienteDAO implements IDAO<Cliente>{
         }
         return cliente;
     }
-   
-     public boolean CheckLogin(String cpf, String senha) throws Exception{
+    
+    public Cliente chek(String cpf, String senha) throws Exception{
         Conexao c = new Conexao();
-        
-       boolean check = false;
-       
-  try{
-      String sql = "SELECT * FROM CLIENTE WHERE CPF=?, SENHA=?";
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?, SENHA=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, cpf);
         ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
-         if(rs.next()){
-           check = true;
+       
+        Cliente cliente = new Cliente();
+        if(rs.next()){
+            cliente.setCodigo(rs.getInt("CODIGO"));
+            cliente.setNome(rs.getString("NOME"));
+            cliente.setCpf(rs.getString("CPF"));
+            cliente.setRg(rs.getString("RG"));
+            cliente.setDatanascimento(rs.getDate("DATANASCIMENTO"));
+            cliente.setEstado(rs.getString("ESTADO"));
+            cliente.setNacionalidade(rs.getString("NACIONALIDADE"));
+            cliente.setCidade(rs.getString("CIDADE"));
+            cliente.setTipoconta(rs.getString("TIPOCONTA"));
+            cliente.setSenha(rs.getString("SENHA"));
         }
-  }catch(SQLException ex){
-      JOptionPane.showMessageDialog(null, ex);
-  }
-     
-        return check;
+        return cliente;
     }
+  
 }
