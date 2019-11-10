@@ -19,7 +19,6 @@ public class Deposito extends javax.swing.JInternalFrame {
 
     private Cliente cliente;
     private Saldo saldo = new Saldo();
-    private ClienteDAO clientedao;
     private SaldoDAO saldodao = new SaldoDAO();
     /**
      * Creates new form Depósito
@@ -30,21 +29,18 @@ public class Deposito extends javax.swing.JInternalFrame {
     }
    
 
- private Boolean validar(){
-     
-        if(btnome.getText().equals(cliente.getNome())){
-            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        if(numeroConta.getValue().equals(cliente.getCodigo())){
-            JOptionPane.showMessageDialog(this, "Númro da Conta inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+private Boolean validar(){
+        if(numeroConta.getText().equals(cliente.getCodigo())){
+            JOptionPane.showMessageDialog(this, "Número da Conta inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if(tipoconta.getSelectedItem().equals(cliente.getTipoconta())){
-            JOptionPane.showMessageDialog(this, "Tipo da Conta inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tipo da Conta inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
             return false;
-        }
-        else {
+    }
+        if(btnome.getText().equals(cliente.getNome())){
+            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
        
         return true;
@@ -199,7 +195,7 @@ public class Deposito extends javax.swing.JInternalFrame {
         try{
                     saldodao.inserir(saldo);
                 }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao Depositar"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         }
     }//GEN-LAST:event_DepositarActionPerformed

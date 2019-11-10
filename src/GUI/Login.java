@@ -2,13 +2,14 @@
 package GUI;
 
 import POO.Cliente;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author francisco.pereira
  */
 public class Login extends javax.swing.JFrame {
-   
+   private Cliente cliente = new Cliente();
     /**
      * Creates new form Login
      */
@@ -149,11 +150,22 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private Boolean validarUsuario(){
+        if(cpf.getText().equals(cliente.getCpf())){
+            JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(senha.getText().equals(cliente.getSenha())){
+            JOptionPane.showMessageDialog(this, "Senha inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+    }
+       
+       
+        return true;
+    }
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
       
-        Cliente cliente = new Cliente();
-      
-        if(cpf.getValue() == cliente.getCpf()&& senha.getText() == cliente.getSenha()){
+        if(validarUsuario()){
            Menu m = new Menu();
            m.setVisible(true);
            dispose(); 
