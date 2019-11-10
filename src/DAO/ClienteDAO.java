@@ -115,7 +115,7 @@ public class ClienteDAO implements IDAO<Cliente>{
         Conexao c = new Conexao();
         String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setString(2, cpf);
+        ps.setString(1, cpf);
         ResultSet rs = ps.executeQuery();
         
         boolean check = false;
