@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author francisco.pereira
  */
 public class Login extends javax.swing.JFrame {
-   private Cliente cliente = new Cliente();
+   private Cliente c = new Cliente();
    private ClienteDAO dao = new ClienteDAO();
    
    
@@ -156,16 +156,23 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Boolean validar() throws Exception{
+        if(dao.check(cpf.getText(),senha.getText())){
+            JOptionPane.showMessageDialog(this, "Login e/ou senha inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-      
        try {
-           if(dao.check(cpf.getText(),senha.getText())){
-               new Menu().setVisible(true); 
+           if(validar()){
+               new Menu().setVisible(true);
                this.dispose();
-           }
-       } catch (Exception ex) {
+           }} catch (Exception ex) {
            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
        }
+       
     }//GEN-LAST:event_entrarActionPerformed
 
     private void AbrirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirContaActionPerformed

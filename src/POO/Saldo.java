@@ -19,7 +19,7 @@ public class Saldo {
 
     public Saldo(int codigo, float saldo, int contacliente) {
         this.codigo = codigo;
-        this.saldo = saldo;
+        this.saldo = +saldo;
         this.contacliente = contacliente;
     }
 

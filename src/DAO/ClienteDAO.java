@@ -111,22 +111,17 @@ public class ClienteDAO implements IDAO<Cliente>{
         return cliente;
     }
     
-    public Boolean check(String cpf, String senha) throws Exception{
+    public boolean check(String cpf, String senha) throws Exception{
         Conexao c = new Conexao();
-        String sql = "SELECT * FROM CLIENTE WHERE CPF=? and SENHA=?";
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setString(1, cpf);
-        ps.setString(2, senha);
+        ps.setString(2, cpf);
         ResultSet rs = ps.executeQuery();
+        
         boolean check = false;
-        try{
-            if(rs.next()){
-           check = true;
+        if(rs.next()){
+            check = true;
         }
-        }catch(SQLException e){
-             JOptionPane.showMessageDialog(null, e, "Alerta", JOptionPane.WARNING_MESSAGE);
-    }
         return check;
     }
-  
 }
