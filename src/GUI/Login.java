@@ -1,7 +1,10 @@
 
 package GUI;
 
+import DAO.ClienteDAO;
 import POO.Cliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,6 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
    private Cliente cliente = new Cliente();
+   private ClienteDAO dao = new ClienteDAO();
+   
+   
     /**
      * Creates new form Login
      */
@@ -150,25 +156,15 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private Boolean validarUsuario(){
-        if(cpf.getText().equals(cliente.getCpf())){
-            JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        if(senha.getText().equals(cliente.getSenha())){
-            JOptionPane.showMessageDialog(this, "Senha inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-    }
-       
-       
-        return true;
-    }
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
       
-        if(validarUsuario()){
-           Menu m = new Menu();
-           m.setVisible(true);
-           dispose(); 
+       try {
+           if(dao.check(cpf.getText(),senha.getText())){
+               new Menu().setVisible(true); 
+               this.dispose();
+           }
+       } catch (Exception ex) {
+           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
        }
     }//GEN-LAST:event_entrarActionPerformed
 

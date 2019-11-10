@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import POO.Cliente;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class ClienteDAO implements IDAO<Cliente>{
@@ -109,28 +111,22 @@ public class ClienteDAO implements IDAO<Cliente>{
         return cliente;
     }
     
-    public Cliente chek(String cpf, String senha) throws Exception{
+    public Boolean check(String cpf, String senha) throws Exception{
         Conexao c = new Conexao();
-        String sql = "SELECT * FROM CLIENTE WHERE CPF=?, SENHA=?";
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=? and SENHA=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, cpf);
         ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
-       
-        Cliente cliente = new Cliente();
-        if(rs.next()){
-            cliente.setCodigo(rs.getInt("CODIGO"));
-            cliente.setNome(rs.getString("NOME"));
-            cliente.setCpf(rs.getString("CPF"));
-            cliente.setRg(rs.getString("RG"));
-            cliente.setDatanascimento(rs.getDate("DATANASCIMENTO"));
-            cliente.setEstado(rs.getString("ESTADO"));
-            cliente.setNacionalidade(rs.getString("NACIONALIDADE"));
-            cliente.setCidade(rs.getString("CIDADE"));
-            cliente.setTipoconta(rs.getString("TIPOCONTA"));
-            cliente.setSenha(rs.getString("SENHA"));
+        boolean check = false;
+        try{
+            if(rs.next()){
+           check = true;
         }
-        return cliente;
+        }catch(SQLException e){
+             JOptionPane.showMessageDialog(null, e, "Alerta", JOptionPane.WARNING_MESSAGE);
+    }
+        return check;
     }
   
 }
