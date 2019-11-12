@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import POO.Cliente;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+
 
 
 public class ClienteDAO implements IDAO<Cliente>{
@@ -110,18 +109,19 @@ public class ClienteDAO implements IDAO<Cliente>{
         }
         return cliente;
     }
-    
     public boolean check(String cpf, String senha) throws Exception{
         Conexao c = new Conexao();
-        String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?and SENHA=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, cpf);
+        ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
         
-        boolean check = false;
+    boolean check = false;
         if(rs.next()){
-            check = true;
+           check = true;
         }
         return check;
     }
+    
 }

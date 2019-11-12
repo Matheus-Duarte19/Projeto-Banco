@@ -228,17 +228,16 @@ public class AbrirConta extends javax.swing.JFrame {
         cliente.setRg((String)btrg.getValue());
         cliente.setEstado(btestado.getText());
         cliente.setCidade(btcidade.getText());
-        cliente.setSenha((String) btsenha.getValue());
-        cliente.setTipoconta((String) tipoconta.getSelectedItem());
+        cliente.setSenha((String)btsenha.getValue());
+        cliente.setTipoconta((String)tipoconta.getSelectedItem());
         try{
-                    clientedao.inserir(cliente);
-                }catch(Exception ex){
+              clientedao.inserir(cliente);
+           }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         }
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
+         new Login().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_CriarContaActionPerformed
 
      private Boolean validarFormulario(){

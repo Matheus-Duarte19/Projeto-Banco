@@ -9,6 +9,8 @@ import DAO.ClienteDAO;
 import DAO.SaldoDAO;
 import POO.Saldo;
 import POO.Cliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class Deposito extends javax.swing.JInternalFrame {
 
-    private Cliente cliente;
+    private Cliente c;
+    private ClienteDAO dao;
     private Saldo saldo = new Saldo();
     private SaldoDAO saldodao = new SaldoDAO();
     /**
@@ -26,24 +29,6 @@ public class Deposito extends javax.swing.JInternalFrame {
     public Deposito() {
         initComponents();
         btsaldo.setText(Float.toString(saldo.getSaldo()));
-    }
-   
-
-private Boolean validar(){
-        if(numeroConta.getText().equals(cliente.getCodigo())){
-            JOptionPane.showMessageDialog(this, "Número da Conta inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        if(tipoconta.getSelectedItem().equals(cliente.getTipoconta())){
-            JOptionPane.showMessageDialog(this, "Tipo da Conta inválida", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-    }
-        if(btnome.getText().equals(cliente.getNome())){
-            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-       
-        return true;
     }
 
     /**
@@ -100,6 +85,8 @@ private Boolean validar(){
                 btsaldoActionPerformed(evt);
             }
         });
+
+        numeroConta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -189,7 +176,13 @@ private Boolean validar(){
     }//GEN-LAST:event_btsaldoActionPerformed
 
     private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
-        if(validar()){
+        try{
+            dao.recuperar((int) numeroConta.getValue());
+        } catch (Exception ex) {
+            Logger.getLogger(Deposito.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if((int)numeroConta.getValue() == c.getCodigo()){
         saldo.setSaldo((float)novosaldo.getValue());
         saldo.setContacliente((int) numeroConta.getValue());
         try{

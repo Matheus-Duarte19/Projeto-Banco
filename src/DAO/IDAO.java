@@ -12,4 +12,6 @@ public interface IDAO<Tipo> {
     public ArrayList<Tipo> listarTodos() throws Exception;
     
     public Tipo recuperar(int codigo) throws Exception;
+   
+    
 }
