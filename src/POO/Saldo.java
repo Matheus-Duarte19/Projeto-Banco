@@ -14,13 +14,11 @@ public class Saldo {
       public Saldo(){
         this.codigo = 0;
         this.saldo = 0;
-        this.contacliente = 0;
    }
 
-    public Saldo(int codigo, float saldo, int contacliente) {
+    public Saldo(int codigo, float saldo) {
         this.codigo = codigo;
         this.saldo = +saldo;
-        this.contacliente = contacliente;
     }
 
     public int getCodigo() {

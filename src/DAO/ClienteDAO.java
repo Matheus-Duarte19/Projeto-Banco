@@ -124,4 +124,19 @@ public class ClienteDAO implements IDAO<Cliente>{
         return check;
     }
     
+    public boolean encontrar (int codigo) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM CLIENTE WHERE CODIGO=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, codigo);
+        ResultSet rs = ps.executeQuery();
+        
+          boolean check = false;
+        if(rs.next()){
+           check = true;
+        }
+        return check;
+    }
+    
+   
 }
