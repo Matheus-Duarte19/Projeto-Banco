@@ -44,6 +44,7 @@ public class ClienteDAO implements IDAO<Cliente>{
         ps.setString(7, cliente.getCidade());
         ps.setString(8, cliente.getTipoconta());
         ps.setString(9, cliente.getSenha());
+        ps.setInt(10, cliente.getCodigo());
         ps.execute();
         c.confirmar();
     }
@@ -92,9 +93,10 @@ public class ClienteDAO implements IDAO<Cliente>{
         String sql = "SELECT * FROM CLIENTE WHERE CODIGO=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setInt(1, codigo);
-        ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery(sql);
        
         Cliente cliente = new Cliente();
+   
         if(rs.next()){
             cliente.setCodigo(rs.getInt("CODIGO"));
             cliente.setNome(rs.getString("NOME"));
@@ -109,6 +111,7 @@ public class ClienteDAO implements IDAO<Cliente>{
         }
         return cliente;
     }
+    
     public boolean check(String cpf, String senha) throws Exception{
         Conexao c = new Conexao();
         String sql = "SELECT * FROM CLIENTE WHERE CPF=?and SENHA=?";
@@ -117,26 +120,11 @@ public class ClienteDAO implements IDAO<Cliente>{
         ps.setString(2, senha);
         ResultSet rs = ps.executeQuery();
         
-    boolean check = false;
+      boolean check = false;
         if(rs.next()){
            check = true;
         }
         return check;
     }
-    
-    public boolean encontrar (int codigo) throws Exception{
-        Conexao c = new Conexao();
-        String sql = "SELECT * FROM CLIENTE WHERE CODIGO=?";
-        PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setInt(1, codigo);
-        ResultSet rs = ps.executeQuery();
-        
-          boolean check = false;
-        if(rs.next()){
-           check = true;
-        }
-        return check;
-    }
-    
    
 }

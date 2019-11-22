@@ -1,25 +1,24 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package POO;
+
 /**
  *
  * @author extra
  */
-public class Saldo {
+public class Transferencia {
     
     private int codigo;
     private float saldo;
     private int contacliente;
     
-    
-      public Saldo(){
+    public Transferencia(){
         this.codigo = 0;
         this.saldo = 0;
    }
-
-    public Saldo(int codigo, float saldo) {
-        this.codigo = codigo;
-        this.saldo = saldo;
-    }
 
     public int getCodigo() {
         return codigo;
@@ -44,22 +43,6 @@ public class Saldo {
     public void setContacliente(int contacliente) {
         this.contacliente = contacliente;
     }
- 
-   
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof Saldo){
-            Saldo s = (Saldo) o;
-            if(s.getCodigo() == this.getCodigo()){
-                return true;
-            }
-        }
-        return false;
-    }
     
-      
+    
 }
-
-        
-    
-

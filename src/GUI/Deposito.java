@@ -49,10 +49,10 @@ public class Deposito extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         Depositar = new keeptoo.KButton();
         novosaldo = new javax.swing.JFormattedTextField();
-        numeroconta = new javax.swing.JFormattedTextField();
         saldo1 = new javax.swing.JLabel();
         tipoconta = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        numero = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,8 +74,6 @@ public class Deposito extends javax.swing.JInternalFrame {
                 DepositarActionPerformed(evt);
             }
         });
-
-        numeroconta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         saldo1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
@@ -101,10 +99,10 @@ public class Deposito extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(nome))
                         .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numeroconta, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numero))
+                        .addGap(27, 27, 27)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
@@ -139,13 +137,13 @@ public class Deposito extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numeroconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(8, 8, 8)
-                        .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,9 +170,20 @@ public class Deposito extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
-       if(saldo.getCodigo() ==0){
+
+          try {
+               clientedao.recuperar((int)numero.getValue());
+               System.out.println(cliente.getNome());
+               
+           } catch (Exception ex) {
+               JOptionPane.showMessageDialog(this, "Cliente Não Encontrado!."
+                    + "\n" +ex.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+           }
+    
+        
+        if(saldo.getCodigo() ==0 || saldo.getCodigo() == cliente.getCodigo()){
              
-                saldo.setContacliente((int)numeroconta.getValue());
+                saldo.setContacliente((int)numero.getValue());
                 saldo.setSaldo((float)novosaldo.getValue());
                 
             try{
@@ -185,7 +194,7 @@ public class Deposito extends javax.swing.JInternalFrame {
                 }
             
         }
-       if(saldo.getCodigo()!=0){
+       if(saldo.getCodigo()!=0 || saldo.getCodigo() == cliente.getCodigo()){
             try{
                 saldo.setSaldo(saldo.getSaldo()+(float) novosaldo.getValue());
                 saldodao.alterar(saldo);
@@ -207,7 +216,7 @@ public class Deposito extends javax.swing.JInternalFrame {
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JTextField nome;
     private javax.swing.JFormattedTextField novosaldo;
-    private javax.swing.JFormattedTextField numeroconta;
+    private javax.swing.JFormattedTextField numero;
     private javax.swing.JLabel saldo1;
     private javax.swing.JComboBox<String> tipoconta;
     // End of variables declaration//GEN-END:variables
