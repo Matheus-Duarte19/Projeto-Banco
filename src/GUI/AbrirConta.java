@@ -233,7 +233,7 @@ public class AbrirConta extends javax.swing.JFrame {
         try{
               clientedao.inserir(cliente);
            }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Erro ao inserir cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao Cadastrar Cliente"+ "\n"+ ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         }
          new Login().setVisible(true);

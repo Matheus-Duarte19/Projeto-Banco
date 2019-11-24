@@ -3,8 +3,6 @@ package GUI;
 
 import DAO.ClienteDAO;
 import POO.Cliente;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +11,8 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
   
-  
+  private ClienteDAO cdao = new ClienteDAO();
+  private Cliente c = new Cliente();
    
    
     /**
@@ -146,19 +145,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        ClienteDAO dao = new ClienteDAO();
+        
         try{
-            if(dao.check(cpf.getText(), senha.getText())){
-              new Menu().setVisible(true);
-           this.dispose();
+            if(cdao.check(cpf.getText(), senha.getText())){
+             cdao.resgatar(cpf.getText());   
+             new Menu().setVisible(true);
+             this.dispose();
+           
+           JOptionPane.showMessageDialog(this, c.getNome(), "Certo", JOptionPane.ERROR_MESSAGE);
          }else{
-           JOptionPane.showMessageDialog(this, "Usuario Inesintente ou Senha Inválida"+ "\n", "ERRO", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "Usuario ou Senha Inválido."+ "\n", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
            } catch (Exception ex) {
                
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Usuario Inexistente."+ "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
           
-        }
+        }  
         
     }//GEN-LAST:event_entrarActionPerformed
 

@@ -73,7 +73,7 @@ public class SaldoDAO implements IDAO<Saldo>{
     @Override
     public Saldo recuperar(int codigo) throws Exception{
         Conexao c = new Conexao();
-        String sql = "SELECT * FROM CONTAS WHERE IDCONTA=?";
+        String sql = "SELECT * FROM CONTAS WHERE IDCLIENTE=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setInt(1, codigo);
         ResultSet rs = ps.executeQuery();

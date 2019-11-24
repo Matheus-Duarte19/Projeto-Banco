@@ -9,8 +9,6 @@ import DAO.ClienteDAO;
 import DAO.SaldoDAO;
 import POO.Saldo;
 import POO.Cliente;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -171,17 +169,7 @@ public class Deposito extends javax.swing.JInternalFrame {
 
     private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
 
-          try {
-               clientedao.recuperar((int)numero.getValue());
-               System.out.println(cliente.getNome());
-               
-           } catch (Exception ex) {
-               JOptionPane.showMessageDialog(this, "Cliente Não Encontrado!."
-                    + "\n" +ex.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
-           }
-    
-        
-        if(saldo.getCodigo() ==0 || saldo.getCodigo() == cliente.getCodigo()){
+        if(saldo.getCodigo() ==0){
              
                 saldo.setContacliente((int)numero.getValue());
                 saldo.setSaldo((float)novosaldo.getValue());
@@ -196,7 +184,7 @@ public class Deposito extends javax.swing.JInternalFrame {
         }
        if(saldo.getCodigo()!=0 || saldo.getCodigo() == cliente.getCodigo()){
             try{
-                saldo.setSaldo(saldo.getSaldo()+(float) novosaldo.getValue());
+                saldo.setSaldo(saldo.getSaldo()+(float)novosaldo.getValue());
                 saldodao.alterar(saldo);
             }   catch (Exception ex) {
                      JOptionPane.showMessageDialog(this, "Erro ao Depositar [Alterar]."

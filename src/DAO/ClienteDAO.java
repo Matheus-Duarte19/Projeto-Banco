@@ -127,4 +127,26 @@ public class ClienteDAO implements IDAO<Cliente>{
         return check;
     }
    
+    public Cliente resgatar(String cpf) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, cpf);
+        ResultSet rs = ps.executeQuery();
+        Cliente cliente = new Cliente();
+        
+        if(rs.next()){
+            cliente.setCodigo(rs.getInt("CODIGO"));
+            cliente.setNome(rs.getString("NOME"));
+            cliente.setCpf(rs.getString("CPF"));
+            cliente.setRg(rs.getString("RG"));
+            cliente.setDatanascimento(rs.getDate("DATANASCIMENTO"));
+            cliente.setEstado(rs.getString("ESTADO"));
+            cliente.setNacionalidade(rs.getString("NACIONALIDADE"));
+            cliente.setCidade(rs.getString("CIDADE"));
+            cliente.setTipoconta(rs.getString("TIPOCONTA"));
+            cliente.setSenha(rs.getString("SENHA"));
+        }
+        return cliente;
+    }
 }

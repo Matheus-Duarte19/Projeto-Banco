@@ -11,7 +11,7 @@ public class Saldo {
     private int contacliente;
     
     
-      public Saldo(){
+   public Saldo(){
         this.codigo = 0;
         this.saldo = 0;
    }
