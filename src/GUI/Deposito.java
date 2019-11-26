@@ -17,8 +17,7 @@ import javax.swing.JOptionPane;
  * @author francisco.pereira
  */
 public class Deposito extends javax.swing.JInternalFrame {
-    private ClienteDAO clientedao = new ClienteDAO();
-    private Cliente cliente = new Cliente();
+    private ClienteDAO cdao = new ClienteDAO();
     private Saldo saldo = new Saldo();
     private SaldoDAO saldodao = new SaldoDAO();
     
@@ -27,7 +26,7 @@ public class Deposito extends javax.swing.JInternalFrame {
      */
     public Deposito() {
         initComponents();
-        saldo1.setText(Float.toString(saldo.getSaldo()));
+        Valor.setText(Double.toString(saldo.getSaldo()));
     }
 
     /**
@@ -46,11 +45,9 @@ public class Deposito extends javax.swing.JInternalFrame {
         nome = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         Depositar = new keeptoo.KButton();
-        novosaldo = new javax.swing.JFormattedTextField();
-        saldo1 = new javax.swing.JLabel();
-        tipoconta = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
-        numero = new javax.swing.JFormattedTextField();
+        Valor = new javax.swing.JLabel();
+        conta = new javax.swing.JFormattedTextField();
+        saldo1 = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -66,19 +63,15 @@ public class Deposito extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel12.setText("Saldo Disponivel:");
 
-        Depositar.setText("Transferir");
+        Depositar.setText("Depositar");
         Depositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DepositarActionPerformed(evt);
             }
         });
 
-        saldo1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        tipoconta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Corrente", "Poupança", " " }));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Tipo da Conta:");
+        Valor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Valor.setText("Valor");
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -96,20 +89,16 @@ public class Deposito extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel9)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(nome))
-                        .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numero))
-                        .addGap(27, 27, 27)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18))))
+                        .addGap(71, 71, 71)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(conta, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
+                .addGap(0, 10, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addComponent(saldo1)
+                .addComponent(Valor)
                 .addGap(203, 203, 203))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +107,7 @@ public class Deposito extends javax.swing.JInternalFrame {
                         .addComponent(Depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(novosaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saldo1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -127,26 +116,23 @@ public class Deposito extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(saldo1))
+                    .addComponent(Valor))
                 .addGap(59, 59, 59)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                        .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(8, 8, 8)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tipoconta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(conta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saldo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(novosaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
                 .addComponent(Depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
@@ -168,12 +154,16 @@ public class Deposito extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarActionPerformed
-
-        if(saldo.getCodigo() ==0){
-             
-                saldo.setContacliente((int)numero.getValue());
-                saldo.setSaldo((float)novosaldo.getValue());
-                
+       /*try{
+    cdao.recuperar((int)conta.getValue());
+       }catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Cliente não Encontrado."
+                    + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }*/
+        saldo.setContacliente((int)conta.getValue()); 
+        saldo.setSaldo((float)saldo1.getValue());
+        
+        if(saldo.getCodigo()==0){
             try{
                 saldodao.inserir(saldo);
             }   catch (Exception ex) {
@@ -182,30 +172,32 @@ public class Deposito extends javax.swing.JInternalFrame {
                 }
             
         }
-       if(saldo.getCodigo()!=0 || saldo.getCodigo() == cliente.getCodigo()){
-            try{
-                saldo.setSaldo(saldo.getSaldo()+(float)novosaldo.getValue());
+        
+       /*if(saldo.getCodigo()!=0){
+           
+           saldo.setSaldo(saldo.getSaldo()+(float)novosaldo.getValue()); 
+          
+           try{
+       
                 saldodao.alterar(saldo);
             }   catch (Exception ex) {
                      JOptionPane.showMessageDialog(this, "Erro ao Depositar [Alterar]."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
-        }
+        }*/
     }//GEN-LAST:event_DepositarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private keeptoo.KButton Depositar;
+    private javax.swing.JLabel Valor;
+    private javax.swing.JFormattedTextField conta;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JTextField nome;
-    private javax.swing.JFormattedTextField novosaldo;
-    private javax.swing.JFormattedTextField numero;
-    private javax.swing.JLabel saldo1;
-    private javax.swing.JComboBox<String> tipoconta;
+    private javax.swing.JFormattedTextField saldo1;
     // End of variables declaration//GEN-END:variables
 }

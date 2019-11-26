@@ -178,7 +178,7 @@ public class Transferencia extends javax.swing.JInternalFrame {
        if(transicao.getCodigo() ==0){
              
                 transicao.setConta((int) conta.getValue());
-                transicao.setValor((float)valor.getValue());
+                transicao.setValor((float)(double)valor.getValue());
                 
                 
             try{
@@ -191,7 +191,7 @@ public class Transferencia extends javax.swing.JInternalFrame {
         }
        if(saldo.getCodigo()!=0 || saldo.getCodigo() == cliente.getCodigo()){
             try{
-                saldo.setSaldo(saldo.getSaldo()+(float)valor.getValue());
+                
                 saldodao.alterar(saldo);
             }   catch (Exception ex) {
                      JOptionPane.showMessageDialog(this, "Erro ao Depositar [Alterar]."

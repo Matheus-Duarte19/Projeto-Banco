@@ -22,7 +22,7 @@ public class SaldoDAO implements IDAO<Saldo>{
         String sql="INSERT INTO CONTAS "
       + "(SALDO,IDCLIENTE) VALUES (?, ?)";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setFloat(1, saldo.getSaldo());
+        ps.setDouble(1, saldo.getSaldo());
         ps.setInt(2, saldo.getContacliente());
         c.confirmar();
     }
@@ -33,7 +33,7 @@ public class SaldoDAO implements IDAO<Saldo>{
         String sql="UPDATE CONTAS SET "
      + "SALDO=?, IDCLIENTE=? WHERE IDCONTA=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setFloat(1, saldo.getSaldo());
+        ps.setDouble(1, saldo.getSaldo());
         ps.setInt(2, saldo.getContacliente());
         ps.setInt(3, saldo.getCodigo());
         ps.execute();

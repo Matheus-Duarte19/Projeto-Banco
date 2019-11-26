@@ -2,7 +2,6 @@
 package GUI;
 
 import DAO.ClienteDAO;
-import POO.Cliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +11,6 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
   
   private ClienteDAO cdao = new ClienteDAO();
-  private Cliente c = new Cliente();
    
    
     /**
@@ -108,7 +106,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                     .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(32, 32, 32))))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +130,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +144,10 @@ public class Login extends javax.swing.JFrame {
         
         try{
             if(cdao.check(cpf.getText(), senha.getText())){
-             cdao.resgatar(cpf.getText());   
+                cdao.resgatar(cpf.getText());
              new Menu().setVisible(true);
              this.dispose();
-           
-           JOptionPane.showMessageDialog(this, c.getNome(), "Certo", JOptionPane.ERROR_MESSAGE);
+ 
          }else{
            JOptionPane.showMessageDialog(this, "Usuario ou Senha Inválido."+ "\n", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
@@ -160,16 +155,28 @@ public class Login extends javax.swing.JFrame {
                
             JOptionPane.showMessageDialog(this, "Usuario Inexistente."+ "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
           
-        }  
-        
+        }
     }//GEN-LAST:event_entrarActionPerformed
 
     private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
-        // TODO add your handling code here:
+       try{
+            if(cdao.check(cpf.getText(), senha.getText())){
+               //cdao.resgatar(cpf.getText());
+             new Menu().setVisible(true);
+             this.dispose();
+ 
+         }else{
+           JOptionPane.showMessageDialog(this, "Usuario ou Senha Inválido."+ "\n", "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+           } catch (Exception ex) {
+               
+            JOptionPane.showMessageDialog(this, "Usuario Inexistente."+ "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+          
+        }
     }//GEN-LAST:event_senhaActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-       if(evt.getClickCount() == 2){
+       if(evt.getClickCount() == 1){
          AbrirConta ac = new AbrirConta();
         ac.setVisible(true);
         dispose();

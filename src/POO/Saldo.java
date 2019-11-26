@@ -1,4 +1,3 @@
-
 package POO;
 /**
  *
@@ -7,20 +6,15 @@ package POO;
 public class Saldo {
     
     private int codigo;
-    private float saldo;
+    private double saldo;
     private int contacliente;
-    
-    
-   public Saldo(){
-        this.codigo = 0;
+
+    public Saldo(){
+        this.codigo =0;
+        this.contacliente =0;
         this.saldo = 0;
-   }
-
-    public Saldo(int codigo, float saldo) {
-        this.codigo = codigo;
-        this.saldo = saldo;
     }
-
+    
     public int getCodigo() {
         return codigo;
     }
@@ -29,7 +23,7 @@ public class Saldo {
         this.codigo = codigo;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -44,8 +38,7 @@ public class Saldo {
     public void setContacliente(int contacliente) {
         this.contacliente = contacliente;
     }
- 
-   
+    
     @Override
     public boolean equals(Object o){
         if(o instanceof Saldo){
@@ -56,8 +49,7 @@ public class Saldo {
         }
         return false;
     }
-    
-      
+   
 }
 
         
