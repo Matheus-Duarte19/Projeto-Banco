@@ -160,7 +160,8 @@ public class Deposito extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Cliente não Encontrado."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }*/
-        saldo.setContacliente((int)conta.getValue()); 
+
+       saldo.setContacliente((int)conta.getValue()); 
         saldo.setSaldo((float)saldo1.getValue());
         
         if(saldo.getCodigo()==0){
